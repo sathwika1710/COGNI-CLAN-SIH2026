@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Life Memories - CogniCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .memory-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .memory-card h2 {
+            color: #16345f;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .memory-card p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .memory-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .memory-form label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .memory-form input,
+        .memory-form textarea {
+            padding: 16px;
+            font-size: 18px;
+            border: 2px solid #dce6f5;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+
+        .memory-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .memory-form button {
+            width: fit-content;
+            padding: 15px 28px;
+            border: none;
+            border-radius: 12px;
+            background: #3478e5;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .memory-form button:hover {
+            background: #2563c7;
+        }
+
+        .memory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .saved-memory {
+            background: #f4f8ff;
+            border-left: 6px solid #3478e5;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .saved-memory h3 {
+            margin: 0 0 8px;
+            color: #16345f;
+            font-size: 23px;
+        }
+
+        .saved-memory p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .success {
+            background: #e7f8ed;
+            color: #176b35;
+        }
+
+        .error {
+            background: #fff0f0;
+            color: #a32626;
+        }
+
+        @media (max-width: 700px) {
+            .memory-card {
+                padding: 22px;
+            }
+
+            .memory-card h2 {
+                font-size: 27px;
+            }
+
+            .memory-card p {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+<style>
+.cognicare-back-nav {
+    width: min(1320px, calc(100% - 40px));
+    margin: 22px auto 18px;
+}
+.cognicare-back-nav a {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+.cognicare-back-nav a:hover {
+    background: #dbe8ff;
+    transform: translateY(-1px);
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="cognicare-back-nav">
+    <a href="dashboard.html">&larr; Back to CogniCare</a>
+</div>
+
+
+<header class="page-header">
+    <div class="header-content">
+        <h1>❤️ My Life Memories</h1>
+        <p>CogniCare Cognitive Wellness & Memory Assistance</p>
+    </div>
+</header>
+
+<main class="memory-container">
+
+    
+
+    <!-- Introduction -->
+    <section class="memory-card">
+        <h2>🌷 My Memories</h2>
+
+        <p>
+            This space helps you keep meaningful memories, familiar places,
+            important people and special life experiences.
+        </p>
+
+        <p>
+            You can write a memory in your own words and come back to it later.
+        </p>
+    </section>
+
+    <!-- Add Memory -->
+    <section class="memory-card">
+
+        <h2>📝 Add a Memory</h2>
+
+        <div id="statusMessage"></div>
+
+        <form id="memoryForm" class="memory-form">
+
+            <label for="memoryTitle">
+                Memory Title
+            </label>
+
+            <input
+                type="text"
+                id="memoryTitle"
+                placeholder="Example: My Childhood Home"
+                required
+            >
+
+            <label for="memoryText">
+                Tell us about this memory
+            </label>
+
+            <textarea
+                id="memoryText"
+                placeholder="Write about a special person, place or experience..."
+                required
+            ></textarea>
+
+            <button type="submit">
+                💾 Save Memory
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Saved Memories -->
+    <section class="memory-card">
+
+        <h2>💖 My Saved Memories</h2>
+
+        <div id="memoryList" class="memory-list">
+            <p>Loading memories...</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/life-memories.js"></script>
+
+<script src="js/auth-guard.js"></script>
+</body>
+</html>
+

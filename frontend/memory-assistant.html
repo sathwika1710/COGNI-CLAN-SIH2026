@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Assistant - CogniCare</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172337;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 21px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #d9e1ed;
+            border-radius: 14px;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .photo-input {
+            padding: 12px;
+            background: #f8fbff;
+        }
+
+        .photo-preview {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .photo-preview img {
+            max-width: 300px;
+            max-height: 220px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 2px solid #d9e1ed;
+        }
+
+        .save-button {
+            margin-top: 25px;
+            padding: 17px 35px;
+            border: none;
+            border-radius: 15px;
+            background: #4285f4;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #286bdc;
+        }
+
+        .search-box {
+            margin-bottom: 22px;
+        }
+
+        .memory-count {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .memory-card {
+            background: #f8fbff;
+            border: 2px solid #e1e9f5;
+            border-radius: 20px;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .memory-photo {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 18px;
+        }
+
+        .memory-card h3 {
+            margin-top: 0;
+            font-size: 23px;
+        }
+
+        .memory-category {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #e8f1ff;
+            color: #245bb5;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .memory-meta {
+            color: #526277;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .memory-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .delete-button {
+            margin-top: 15px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 10px;
+            background: #ffe4e4;
+            color: #b42323;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background: #ffd2d2;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 35px;
+            font-size: 19px;
+            color: #667085;
+        }
+
+        .success-message {
+            margin-top: 18px;
+            color: #16803c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .photo-note {
+            font-size: 15px;
+            color: #667085;
+            margin-top: 7px;
+        }
+
+        @media (max-width: 700px) {
+
+            h1 {
+                font-size: 31px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .memory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-photo {
+                height: 200px;
+            }
+        }
+    </style>
+
+<style>
+.cognicare-back-nav {
+    width: min(1320px, calc(100% - 40px));
+    margin: 22px auto 10px;
+}
+.cognicare-back-nav button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.cognicare-back-nav button:hover {
+    background: #dbe8ff;
+    transform: translateY(-1px);
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="cognicare-back-nav">
+    <button type="button" onclick="window.location.href='dashboard.html'">
+        &larr; Back to CogniCare
+    </button>
+</div>
+
+
+
+
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <h1>📝 Memory Assistant</h1>
+
+    <div class="subtitle">
+        Store and revisit important personal memories.
+    </div>
+
+
+    <!-- ADD MEMORY -->
+
+    <div class="card">
+
+        <h2>➕ Add a Memory</h2>
+
+        <form id="memoryForm">
+
+            <label for="memoryTitle">
+                Memory Title
+            </label>
+
+            <input
+                type="text"
+                id="memoryTitle"
+                placeholder="Example: My daughter's wedding"
+                required
+            >
+
+
+            <label for="person">
+                Person / People
+            </label>
+
+            <input
+                type="text"
+                id="person"
+                placeholder="Example: My daughter"
+            >
+
+
+            <label for="memoryDate">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="memoryDate"
+            >
+
+
+            <label for="category">
+                Category
+            </label>
+
+            <select id="category">
+
+                <option value="Family">
+                    Family
+                </option>
+
+                <option value="Friends">
+                    Friends
+                </option>
+
+                <option value="Festival">
+                    Festival
+                </option>
+
+                <option value="Travel">
+                    Travel
+                </option>
+
+                <option value="Achievement">
+                    Achievement
+                </option>
+
+                <option value="Daily Life">
+                    Daily Life
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <!-- PHOTO -->
+
+            <label for="memoryPhoto">
+                📷 Add a Photo
+            </label>
+
+            <input
+                type="file"
+                id="memoryPhoto"
+                class="photo-input"
+                accept="image/*"
+            >
+
+            <div class="photo-note">
+                Add an optional photo related to this memory.
+            </div>
+
+            <div
+                class="photo-preview"
+                id="photoPreview"
+            >
+                <img
+                    id="previewImage"
+                    alt="Photo preview"
+                >
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <label for="memoryText">
+                Tell me about this memory
+            </label>
+
+            <textarea
+                id="memoryText"
+                placeholder="Write something you would like to remember..."
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                💾 Save Memory
+            </button>
+
+        </form>
+
+
+        <div
+            id="successMessage"
+            class="success-message"
+        ></div>
+
+    </div>
+
+
+    <!-- SAVED MEMORIES -->
+
+    <div class="card">
+
+        <h2>❤️ My Memories</h2>
+
+        <div
+            class="memory-count"
+            id="memoryCount"
+        >
+            0 memories
+        </div>
+
+
+        <input
+            type="text"
+            id="searchMemory"
+            class="search-box"
+            placeholder="🔎 Search your memories..."
+        >
+
+
+        <div
+            class="memory-grid"
+            id="memoryList"
+        >
+
+            <div class="empty-message">
+                No memories saved yet.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MEMORY ASSISTANT JS -->
+
+<script src="js/memory-assistant.js?v=3"></script>
+
+
+
+
+</body>
+
+</html>

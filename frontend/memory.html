@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CogniCare - Memory Match & Recall</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .memory-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .memory-header {
+            margin: 25px 0;
+        }
+
+        .memory-header h1 {
+            font-size: 38px;
+            color: #123b70;
+            margin-top: 15px;
+        }
+
+        .memory-header p {
+            color: #607895;
+            font-size: 18px;
+        }
+
+        .adaptive-card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(30, 70, 120, 0.08);
+        }
+
+        .adaptive-card h2 {
+            color: #123b70;
+            margin-bottom: 12px;
+        }
+
+        .adaptive-status {
+            color: #526b8a;
+            margin-bottom: 18px;
+        }
+
+        .difficulty-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .difficulty-box {
+            background: #f5f8fd;
+            border: 1px solid #e1e9f3;
+            border-radius: 14px;
+            padding: 15px;
+        }
+
+        .difficulty-box strong {
+            display: block;
+            color: #123b70;
+            margin-bottom: 5px;
+        }
+
+        .difficulty-box span {
+            color: #607895;
+        }
+
+        .memory-game {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(30, 70, 120, 0.08);
+        }
+
+        .memory-game h2 {
+            color: #123b70;
+            margin-bottom: 8px;
+        }
+
+        #instruction {
+            font-size: 20px;
+            font-weight: 600;
+            color: #526b8a;
+            margin: 15px 0 25px;
+        }
+
+        #gameArea {
+            min-height: 180px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .memory-card {
+            background: #f5f8fd;
+            border: 2px solid #dbe5f2;
+            border-radius: 18px;
+            padding: 22px 12px;
+            text-align: center;
+            font-weight: 700;
+            color: #123b70;
+        }
+
+        .memory-card .emoji {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .hidden-message {
+            grid-column: 1 / -1;
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eef4ff;
+            border-radius: 18px;
+            color: #526b8a;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        #startGame {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        #startGame:hover {
+            background: #1d4ed8;
+        }
+
+        #startGame:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .object-option {
+            min-height: 90px;
+            padding: 15px;
+            border: 2px solid #dbe5f2;
+            border-radius: 16px;
+            background: white;
+            color: #123b70;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .object-option span:first-child {
+            display: block;
+            font-size: 34px;
+            margin-bottom: 5px;
+        }
+
+        .object-option:hover {
+            border-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .object-option.selected {
+            border-color: #2563eb;
+            background: #eef4ff;
+        }
+
+        .selection-info {
+            margin-top: 18px;
+            color: #526b8a;
+            font-weight: 600;
+        }
+
+        #result {
+            margin-top: 25px;
+        }
+
+        .result-box {
+            background: #eef8f1;
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid #cfe8d6;
+        }
+
+        .result-box h2 {
+            color: #176b3a;
+            margin-bottom: 15px;
+        }
+
+        .result-box p {
+            margin: 7px 0;
+            color: #34516d;
+        }
+
+        .result-box button {
+            margin-top: 15px;
+            padding: 11px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        #saveStatus {
+            margin-top: 15px;
+            color: #176b3a;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .memory-header h1 {
+                font-size: 30px;
+            }
+
+            .difficulty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-game {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container memory-page">
+
+        <!-- Back -->
+        <div class="memory-header">
+            <a href="games.html" class="back-button">
+                &#x2190; Back to All Activities
+            </a>
+
+            <h1>&#x1F9E0; Memory Match &amp; Recall</h1>
+
+            <p>
+                Remember familiar objects and recall them after a short period.
+            </p>
+        </div>
+
+        <!-- AI Difficulty -->
+        <section class="adaptive-card">
+
+            <h2>&#x1F916; AI Adaptive Difficulty</h2>
+
+            <p id="adaptiveStatus" class="adaptive-status">
+                AI is analyzing recent performance...
+            </p>
+
+            <div class="difficulty-grid">
+
+                <div class="difficulty-box">
+                    <strong>Difficulty</strong>
+                    <span id="difficulty">Loading...</span>
+                </div>
+
+                <div class="difficulty-box">
+                    <strong>Objects</strong>
+                    <span id="objectCount">-</span>
+                </div>
+
+                <div class="difficulty-box">
+                    <strong>Display Time</strong>
+                    <span id="displayTime">-</span>
+                </div>
+
+            </div>
+
+            <div class="difficulty-box" style="margin-top: 15px;">
+                <strong>AI Confidence</strong>
+                <span id="confidence">-</span>
+            </div>
+
+        </section>
+
+        <!-- Game -->
+        <section class="memory-game">
+
+            <h2>Memory Challenge</h2>
+
+            <p id="instruction">
+                Press Start Game when you are ready.
+            </p>
+
+            <div id="gameArea">
+                <div class="hidden-message">
+                    Your objects will appear here.
+                </div>
+            </div>
+
+            <button id="startGame" type="button">
+                Start Game
+            </button>
+
+            <!-- Recall options -->
+            <div id="recallSection" style="margin-top: 30px;">
+
+                <h3>Which objects did you see?</h3>
+
+                <div id="options"></div>
+
+                <div class="selection-info">
+                    Selected:
+                    <span id="selectedCount">0 / 0</span>
+                </div>
+
+            </div>
+
+            <!-- Result -->
+            <div id="result"></div>
+
+            <div id="saveStatus"></div>
+
+        </section>
+
+    </div>
+
+    <!-- Required JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/adaptive.js"></script>
+    <script src="js/memory-match.js"></script>
+
+<script src="js/auth-guard.js"></script>
+</body>
+
+</html>
+

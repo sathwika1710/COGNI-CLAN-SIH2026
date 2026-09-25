@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | CogniCare</title>
+
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-header">
+            <div class="brain">🧠</div>
+
+            <h1>CogniCare</h1>
+
+            <p>Cognitive Care & Memory Assistance</p>
+        </div>
+
+
+        <div class="auth-card">
+
+            <!-- ================================================= -->
+            <!-- LOGIN -->
+            <!-- ================================================= -->
+
+            <div id="login-section">
+
+                <h2>Welcome Back</h2>
+
+                <p class="subtitle">
+                    Login to continue to CogniCare
+                </p>
+
+                <form id="login-form">
+
+                    <label for="login-email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="login-email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label for="login-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+
+                    <button type="submit" id="login-button">
+                        Login
+                    </button>
+
+                </form>
+
+                <div id="login-message" class="message"></div>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <button type="button" id="show-signup">
+                        Sign Up
+                    </button>
+                </p>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SIGNUP -->
+            <!-- ================================================= -->
+
+            <div id="signup-section" style="display: none;">
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Create your CogniCare account
+                </p>
+
+                <form id="signup-form">
+
+                    <label for="signup-name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signup-name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+
+                    <label for="signup-email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signup-email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label for="signup-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signup-password"
+                        placeholder="Minimum 8 characters"
+                        minlength="8"
+                        required
+                    >
+
+
+                    <label for="signup-age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="signup-age"
+                        min="1"
+                        max="120"
+                        placeholder="Enter your age"
+                        required
+                    >
+
+
+                    <label for="signup-language">
+                        Preferred Language
+                    </label>
+
+                    <select id="signup-language">
+
+                        <option value="en">
+                            English
+                        </option>
+
+                        <option value="te">
+                            Telugu
+                        </option>
+
+                        <option value="hi">
+                            Hindi
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit" id="signup-button">
+                        Create Account
+                    </button>
+
+                </form>
+
+                <div id="signup-message" class="message"></div>
+
+                <p class="switch-text">
+                    Already have an account?
+
+                    <button type="button" id="show-login">
+                        Login
+                    </button>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="security-note">
+            🔒 Your account information is securely stored.
+        </div>
+
+        <div class="medical-note">
+            <strong>Important:</strong>
+            CogniCare is a supportive cognitive assistance platform
+            and does not diagnose dementia or replace professional
+            medical advice.
+        </div>
+
+    </div>
+
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

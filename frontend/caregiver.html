@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Caregiver Dashboard - CogniCare</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+        /* ============================================================
+   Caregiver Dashboard - Dynamic Data
+   ============================================================ */
+
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.activity-item strong {
+    color: #1f2937;
+}
+
+.activity-item p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.activity-score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.activity-score strong {
+    font-size: 20px;
+}
+
+.activity-score span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.alert-content {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.alert-icon {
+    font-size: 32px;
+}
+
+.alert-content strong {
+    font-size: 18px;
+}
+
+.alert-content p {
+    margin: 6px 0;
+}
+
+.alert-content small {
+    color: #6b7280;
+}
+
+.ai-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px;
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+}
+
+.ai-icon {
+    font-size: 34px;
+}
+
+.ai-card strong {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.ai-card h3 {
+    margin: 5px 0;
+    font-size: 24px;
+}
+
+.ai-card p {
+    margin: 8px 0 0;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.ai-card small {
+    color: #6b7280;
+}
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f7fb;
+
+            color: #14213d;
+
+        }
+
+
+        .header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2463eb,
+                    #4d8bf5
+                );
+
+            color: white;
+
+            padding: 28px 6%;
+
+        }
+
+
+        .header h1 {
+
+            margin: 0;
+
+            font-size: 38px;
+
+        }
+
+
+        .header p {
+
+            font-size: 20px;
+
+            margin: 8px 0 0;
+
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1400px;
+
+            margin: 35px auto;
+
+        }
+
+
+        .back {
+
+            display: inline-block;
+
+            background: #e8f0ff;
+
+            color: #2463eb;
+
+            padding: 14px 22px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 24px;
+
+            padding: 30px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+
+        }
+
+
+        .card h2 {
+
+            font-size: 30px;
+
+            margin-top: 0;
+
+        }
+
+
+        .status {
+
+            background: #eaf7ee;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            font-size: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .stat {
+
+            background: #f4f8ff;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .stat .number {
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+            color: #2463eb;
+
+        }
+
+
+        .stat .label {
+
+            margin-top: 8px;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =====================================================
+           AI
+        ===================================================== */
+
+        .ai-box {
+
+            background: #eef5ff;
+
+            border-left: 6px solid #2463eb;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            font-size: 19px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .difficulty {
+
+            display: inline-block;
+
+            background: #dce9ff;
+
+            color: #2463eb;
+
+            padding: 8px 16px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =====================================================
+           COGNITIVE SCREENING
+        ===================================================== */
+
+        .screening-box {
+
+            background: #f8f5ff;
+
+            border-left: 6px solid #7b61c9;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+        }
+
+
+        .screening-result {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .screening-score {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .screening-date {
+
+            color: #68778d;
+
+            font-size: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .screening-message {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .screening-btn {
+
+            display: inline-block;
+
+            background: #7b61c9;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+        }
+
+
+        .screening-btn:hover {
+
+            opacity: 0.9;
+
+        }
+
+
+        .screening-loading {
+
+            color: #68778d;
+
+            font-size: 17px;
+
+        }
+
+
+        .screening-empty {
+
+            background: #f5f7fa;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .screening-empty a {
+
+            color: #7b61c9;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+
+        .screening-error {
+
+            background: #fff5f5;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            color: #8a4b4b;
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           ACTIVITIES
+        ===================================================== */
+
+        .activities {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        .activity {
+
+            border: 1px solid #dce3ee;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr 1fr;
+
+            gap: 15px;
+
+            align-items: center;
+
+            font-size: 17px;
+
+        }
+
+
+        .activity strong {
+
+            font-size: 18px;
+
+        }
+
+
+        /* =====================================================
+           ALERT
+        ===================================================== */
+
+        .alert-box {
+
+            background: #fff7df;
+
+            border-left: 6px solid #f0a500;
+
+            padding: 20px;
+
+            border-radius: 15px;
+
+            font-size: 18px;
+
+        }
+
+
+        .good {
+
+            color: #16833b;
+
+            font-weight: bold;
+
+        }
+
+
+        .attention {
+
+            color: #c47a00;
+
+            font-weight: bold;
+
+        }
+
+
+        .note {
+
+            color: #555;
+
+            font-size: 15px;
+
+            margin-top: 15px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .activity {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .activity {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .header h1 {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+
+<style>
+.cognicare-back-nav {
+    width: min(1320px, calc(100% - 40px));
+    margin: 22px auto 10px;
+}
+.cognicare-back-nav button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.cognicare-back-nav button:hover {
+    background: #dbe8ff;
+    transform: translateY(-1px);
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="cognicare-back-nav">
+    <button type="button" onclick="window.location.href='dashboard.html'">
+        &larr; Back to CogniCare
+    </button>
+</div>
+
+
+
+
+
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+<header class="header">
+
+    <h1>
+        👨‍⚕️ Caregiver Dashboard
+    </h1>
+
+    <p>
+        CogniCare Cognitive Wellness & Memory Assistance
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- BACK -->
+
+    
+
+
+    <!-- ========================================================
+         PATIENT OVERVIEW
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            👤 Patient Overview
+        </h2>
+
+
+        <div
+            class="status"
+            id="status"
+        >
+
+            Loading patient activity...
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="totalActivities"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Activities Completed
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="averageAccuracy"
+                >
+                    0%
+                </div>
+
+                <div class="label">
+                    Average Performance
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="averageResponse"
+                >
+                    0s
+                </div>
+
+                <div class="label">
+                    Average Response Time
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="bestPerformance"
+                >
+                    0%
+                </div>
+
+                <div class="label">
+                    Best Performance
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         AI ADAPTIVE DIFFICULTY
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            🤖 AI Adaptive Difficulty
+        </h2>
+
+
+        <div
+            class="ai-box"
+            id="aiRecommendation"
+        >
+
+            Loading AI recommendation...
+
+        </div>
+
+
+        <p class="note">
+
+            The recommendation is generated from recent
+            longitudinal game-performance data using the
+            CogniCare Transformer.
+
+            It is an activity recommendation,
+            not a medical diagnosis.
+
+        </p>
+
+    </section>
+
+
+    <!-- ========================================================
+         LATEST COGNITIVE SCREENING
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            🧠 Latest Cognitive Screening
+        </h2>
+
+
+        <div
+            class="screening-box"
+            id="screeningResult"
+        >
+
+            <div class="screening-loading">
+
+                Loading latest screening result...
+
+            </div>
+
+        </div>
+
+
+        <p class="note">
+
+            ⚠️ This screening summarizes symptoms reported by
+            the user. It does not diagnose dementia or determine
+            a medical dementia stage.
+
+        </p>
+
+    </section>
+
+
+    <!-- ========================================================
+         CAREGIVER ATTENTION
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            🔔 Caregiver Attention
+        </h2>
+
+
+        <div
+            id="alertBox"
+            class="alert-box"
+        >
+
+            Checking recent activity...
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         RECENT ACTIVITIES
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            🎮 Recent Cognitive Activities
+        </h2>
+
+
+        <div
+            id="activities"
+            class="activities"
+        >
+
+            Loading activities...
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         MONITORING
+    ========================================================= -->
+
+    <section class="card">
+
+        <h2>
+            📊 What the Caregiver Can Monitor
+        </h2>
+
+
+        <div class="ai-box">
+
+            <p>
+                ✅ Cognitive activity completion
+            </p>
+
+            <p>
+                ✅ Accuracy and scores
+            </p>
+
+            <p>
+                ✅ Response time
+            </p>
+
+            <p>
+                ✅ Mistakes and performance trends
+            </p>
+
+            <p>
+                ✅ Difficulty level used
+            </p>
+
+            <p>
+                ✅ AI-recommended difficulty
+            </p>
+
+            <p>
+                ✅ Recent activity patterns
+            </p>
+
+            <p>
+                ✅ Cognitive symptom-screening results
+            </p>
+
+            <p>
+                ✅ Emotional engagement responses when provided
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+
+<script>
+
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
+
+const USER_ID = Number(JSON.parse(localStorage.getItem("cognicare_user") || "{}").user_id || 0);
+
+const API_BASE_URL =
+    "http://127.0.0.1:8000";
+
+
+// ============================================================
+// LOAD CAREGIVER DASHBOARD
+// ============================================================
+
+async function loadCaregiverDashboard() {
+
+
+    // ========================================================
+    // GAME ACTIVITIES
+    // ========================================================
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/game-sessions/user/${USER_ID}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load activities"
+            );
+
+        }
+
+
+        const sessions =
+            await response.json();
+
+
+        const completed =
+            sessions.filter(
+                session =>
+                    session.completed === true
+            );
+
+
+        // ----------------------------------------------------
+        // TOTAL ACTIVITIES
+        // ----------------------------------------------------
+
+        document.getElementById(
+            "totalActivities"
+        ).textContent =
+            completed.length;
+
+
+        // ----------------------------------------------------
+        // ACCURACY
+        // ----------------------------------------------------
+
+        const accuracies =
+            completed
+                .map(
+                    session =>
+                        Number(
+                            session.accuracy
+                        )
+                )
+                .filter(
+                    value =>
+                        !isNaN(value)
+                );
+
+
+        if (accuracies.length > 0) {
+
+
+            const average =
+                accuracies.reduce(
+                    (a, b) =>
+                        a + b,
+                    0
+                ) /
+                accuracies.length;
+
+
+            const best =
+                Math.max(
+                    ...accuracies
+                );
+
+
+            document.getElementById(
+                "averageAccuracy"
+            ).textContent =
+                average.toFixed(1) +
+                "%";
+
+
+            document.getElementById(
+                "bestPerformance"
+            ).textContent =
+                best.toFixed(1) +
+                "%";
+
+        }
+
+
+        // ----------------------------------------------------
+        // RESPONSE TIME
+        // ----------------------------------------------------
+
+        const responseTimes =
+            completed
+                .map(
+                    session =>
+                        Number(
+                            session.response_time
+                        )
+                )
+                .filter(
+                    value =>
+                        !isNaN(value)
+                );
+
+
+        if (responseTimes.length > 0) {
+
+
+            const averageResponse =
+                responseTimes.reduce(
+                    (a, b) =>
+                        a + b,
+                    0
+                ) /
+                responseTimes.length;
+
+
+            document.getElementById(
+                "averageResponse"
+            ).textContent =
+                averageResponse.toFixed(1) +
+                "s";
+
+        }
+
+
+        // ----------------------------------------------------
+        // STATUS
+        // ----------------------------------------------------
+
+        const status =
+            document.getElementById(
+                "status"
+            );
+
+
+        if (completed.length === 0) {
+
+            status.innerHTML =
+                "ℹ️ No completed cognitive activities yet.";
+
+        }
+
+        else {
+
+            status.innerHTML =
+                `<span class="good">
+                    ✅ Patient has completed
+                    ${completed.length}
+                    cognitive activit${completed.length === 1 ? "y" : "ies"}.
+                </span>`;
+
+        }
+
+
+        // ----------------------------------------------------
+        // RECENT ACTIVITIES
+        // ----------------------------------------------------
+
+        displayActivities(
+            completed
+        );
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Activity loading error:",
+            error
+        );
+
+
+        document.getElementById(
+            "status"
+        ).innerHTML =
+            `<span class="attention">
+                ⚠️ Unable to load activity data.
+            </span>`;
+
+
+        document.getElementById(
+            "activities"
+        ).innerHTML =
+            `
+                <div class="screening-error">
+
+                    Unable to load recent activities.
+
+                </div>
+            `;
+
+    }
+
+
+    // ========================================================
+    // AI RECOMMENDATION
+    // ========================================================
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/adaptive/${USER_ID}/Memory%20Match%20%26%20Recall`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "AI API unavailable"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        document.getElementById(
+            "aiRecommendation"
+        ).innerHTML = `
+
+            <strong>
+                Recommended Difficulty:
+            </strong>
+
+            <br><br>
+
+            <span class="difficulty">
+
+                ${data.recommended_difficulty}
+
+            </span>
+
+            <br><br>
+
+            <strong>
+                AI Confidence:
+            </strong>
+
+            ${(data.confidence * 100).toFixed(1)}%
+
+            <br><br>
+
+            The Transformer analyses recent
+            longitudinal game-performance data
+            to recommend an appropriate activity
+            difficulty.
+
+        `;
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "AI recommendation error:",
+            error
+        );
+
+
+        document.getElementById(
+            "aiRecommendation"
+        ).innerHTML = `
+
+            ⚠️ AI recommendation is currently
+            unavailable.
+
+        `;
+
+    }
+
+
+    // ========================================================
+    // COGNITIVE SCREENING
+    // ========================================================
+
+    await loadLatestScreening();
+
+
+    // ========================================================
+    // CAREGIVER ALERT
+    // ========================================================
+
+    updateCaregiverAlert();
+
+}
+
+
+// ============================================================
+// LOAD LATEST SCREENING
+// ============================================================
+
+async function loadLatestScreening() {
+
+
+    const container =
+        document.getElementById(
+            "screeningResult"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/cognitive-screenings/user/${USER_ID}/latest`
+            );
+
+
+        // ----------------------------------------------------
+        // NO SCREENING
+        // ----------------------------------------------------
+
+        if (response.status === 404) {
+
+
+            container.innerHTML = `
+
+                <div class="screening-empty">
+
+                    🧠 No cognitive screening has been
+                    completed yet.
+
+                    <br><br>
+
+                    <a href="cognitive-screening.html">
+
+                        Start Cognitive Screening →
+
+                    </a>
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load screening"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        // ----------------------------------------------------
+        // RESULT ICON
+        // ----------------------------------------------------
+
+        let icon = "🧠";
+
+
+        if (
+            data.result_category ===
+            "Few Symptoms Reported"
+        ) {
+
+            icon = "🟢";
+
+        }
+
+        else if (
+            data.result_category ===
+            "Some Cognitive Symptoms Reported"
+        ) {
+
+            icon = "🟡";
+
+        }
+
+        else if (
+            data.result_category ===
+            "Several Symptoms Reported"
+        ) {
+
+            icon = "🔴";
+
+        }
+
+
+        // ----------------------------------------------------
+        // DATE
+        // ----------------------------------------------------
+
+        let date =
+            "Recently";
+
+
+        if (data.screened_at) {
+
+            date =
+                new Date(
+                    data.screened_at
+                ).toLocaleString(
+                    "en-IN",
+                    {
+                        dateStyle: "medium",
+                        timeStyle: "short"
+                    }
+                );
+
+        }
+
+
+        // ----------------------------------------------------
+        // DISPLAY
+        // ----------------------------------------------------
+
+        container.innerHTML = `
+
+            <div class="screening-result">
+
+                ${icon}
+
+                ${data.result_category}
+
+            </div>
+
+
+            <div class="screening-score">
+
+                Score:
+
+                ${data.score}
+
+                /
+
+                ${data.max_score}
+
+                (${data.percentage}%)
+
+            </div>
+
+
+            <div class="screening-date">
+
+                Screened on:
+                ${date}
+
+            </div>
+
+
+            <div class="screening-message">
+
+                <strong>
+                    📋 Screening Summary
+                </strong>
+
+                <p>
+
+                    The user reported symptoms across
+                    different cognitive areas including
+                    memory, orientation, communication,
+                    everyday activities, problem solving,
+                    recognition, and behaviour or mood.
+
+                </p>
+
+
+                <p>
+
+                    This result is a supportive
+                    symptom-screening summary and
+                    <strong>not a medical diagnosis</strong>.
+
+                </p>
+
+
+                <p>
+
+                    If symptoms are persistent,
+                    increasing, or affecting daily life,
+                    encourage discussion with a qualified
+                    healthcare professional.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="cognitive-screening.html"
+                class="screening-btn"
+            >
+
+                Run Screening Again →
+
+            </a>
+
+        `;
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Screening loading error:",
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="screening-error">
+
+                ⚠️ Unable to load the latest
+                cognitive screening result.
+
+                <br><br>
+
+                Please make sure the CogniCare
+                backend is running.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ============================================================
+// DISPLAY RECENT ACTIVITIES
+// ============================================================
+
+function displayActivities(
+    sessions
+) {
+
+
+    const container =
+        document.getElementById(
+            "activities"
+        );
+
+
+    if (
+        !sessions ||
+        sessions.length === 0
+    ) {
+
+
+        container.innerHTML = `
+
+            <div class="screening-empty">
+
+                No completed activities yet.
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    // Most recent first
+
+    const recent =
+        [...sessions]
+            .sort(
+                (a, b) =>
+                    new Date(b.played_at) -
+                    new Date(a.played_at)
+            )
+            .slice(0, 10);
+
+
+    container.innerHTML = "";
+
+
+    // Header
+
+    const header =
+        document.createElement(
+            "div"
+        );
+
+
+    header.className =
+        "activity";
+
+
+    header.innerHTML = `
+
+        <strong>Activity</strong>
+
+        <strong>Difficulty</strong>
+
+        <strong>Accuracy</strong>
+
+        <strong>Score</strong>
+
+        <strong>Response</strong>
+
+    `;
+
+
+    container.appendChild(
+        header
+    );
+
+
+    // Rows
+
+    recent.forEach(
+        function (session) {
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "activity";
+
+
+            row.innerHTML = `
+
+                <strong>
+                    ${session.game_name || "Cognitive Activity"}
+                </strong>
+
+                <span>
+                    ${session.difficulty || "--"}
+                </span>
+
+                <span>
+                    ${Number(session.accuracy || 0).toFixed(1)}%
+                </span>
+
+                <span>
+                    ${Number(session.score || 0).toFixed(0)}
+                </span>
+
+                <span>
+                    ${Number(session.response_time || 0).toFixed(1)}s
+                </span>
+
+            `;
+
+
+            container.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// CAREGIVER ATTENTION
+// ============================================================
+
+function updateCaregiverAlert() {
+
+
+    const alertBox =
+        document.getElementById(
+            "alertBox"
+        );
+
+
+    // Get latest activities from the page data
+
+    fetch(
+        `${API_BASE_URL}/game-sessions/user/${USER_ID}`
+    )
+
+        .then(
+            response =>
+                response.json()
+        )
+
+        .then(
+            sessions => {
+
+
+                const completed =
+                    sessions.filter(
+                        session =>
+                            session.completed === true
+                    );
+
+
+                if (
+                    completed.length === 0
+                ) {
+
+
+                    alertBox.innerHTML = `
+
+                        <span class="attention">
+
+                            ⚠️ No completed activities yet.
+
+                        </span>
+
+                        <br><br>
+
+                        Encourage the user to begin
+                        a cognitive activity.
+
+                    `;
+
+
+                    return;
+
+                }
+
+
+                // Most recent session
+
+                const latest =
+                    [...completed]
+                        .sort(
+                            (a, b) =>
+                                new Date(b.played_at) -
+                                new Date(a.played_at)
+                        )[0];
+
+
+                const latestAccuracy =
+                    Number(
+                        latest.accuracy || 0
+                    );
+
+
+                if (
+                    latestAccuracy >= 80
+                ) {
+
+
+                    alertBox.innerHTML = `
+
+                        <span class="good">
+
+                            ✅ Recent activity looks good.
+
+                        </span>
+
+                        <br><br>
+
+                        The latest activity had
+                        ${latestAccuracy.toFixed(1)}%
+                        accuracy.
+
+                        Continue regular cognitive
+                        activities.
+
+                    `;
+
+                }
+
+                else {
+
+
+                    alertBox.innerHTML = `
+
+                        <span class="attention">
+
+                            🟡 Activity may need attention.
+
+                        </span>
+
+                        <br><br>
+
+                        The latest activity had
+                        ${latestAccuracy.toFixed(1)}%
+                        accuracy.
+
+                        Consider encouraging regular,
+                        comfortable practice.
+
+                    `;
+
+                }
+
+            }
+        )
+
+        .catch(
+            error => {
+
+                console.error(
+                    "Caregiver alert error:",
+                    error
+                );
+
+
+                alertBox.innerHTML = `
+
+                    ⚠️ Unable to check recent activity.
+
+                `;
+
+            }
+        );
+
+}
+
+
+// ============================================================
+// START
+// ============================================================
+
+loadCaregiverDashboard();
+
+
+</script>
+
+
+<script src="js/auth-guard.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+

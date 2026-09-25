@@ -1,0 +1,79 @@
+﻿/* =========================================================
+   COGNICARE - CLERK AUTHENTICATION
+   Passwordless Email OTP + SMS OTP
+   ========================================================= */
+
+window.addEventListener("load", async function () {
+
+    console.log("Starting CogniCare authentication...");
+
+    const loading = document.getElementById("auth-loading");
+    const authContainer = document.getElementById("clerk-auth");
+
+    try {
+
+        // Load Clerk
+        await Clerk.load({
+            ui: {
+                ClerkUI: window.__internal_ClerkUICtor
+            }
+        });
+
+        console.log("Clerk loaded successfully.");
+
+        // If user is already signed in,
+        // redirect immediately to dashboard.
+        if (Clerk.isSignedIn) {
+
+            console.log("User already signed in.");
+
+            window.location.replace("dashboard.html");
+
+            return;
+        }
+
+        // Hide loading screen
+        if (loading) {
+            loading.style.display = "none";
+        }
+
+        // Show Clerk Sign-In UI
+        Clerk.mountSignIn(
+            authContainer,
+            {
+                routing: "hash",
+
+                signUpUrl: "auth.html",
+
+                fallbackRedirectUrl: "dashboard.html",
+
+                forceRedirectUrl: "dashboard.html"
+            }
+        );
+
+        console.log("CogniCare authentication UI mounted.");
+
+    } catch (error) {
+
+        console.error(
+            "CogniCare authentication error:",
+            error
+        );
+
+        if (loading) {
+
+            loading.innerHTML = `
+                <div class="error-box">
+                    <h3>Unable to load authentication</h3>
+
+                    <p>
+                        Please refresh the page and try again.
+                    </p>
+                </div>
+            `;
+
+        }
+
+    }
+
+});

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CogniCare - Memory Match & Recall</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 20px;
+        }
+
+        .ai-panel {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .ai-panel h2 {
+            margin-top: 0;
+        }
+
+        .ai-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-card {
+            background: #eef5ff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .info-card strong {
+            display: block;
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        #instruction {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        #gameArea {
+            min-height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .memory-card {
+            width: 130px;
+            height: 130px;
+            background: #eaf2ff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .memory-card .emoji {
+            font-size: 55px;
+            margin-bottom: 5px;
+        }
+
+        .hidden-message {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .object-option {
+            min-width: 120px;
+            min-height: 80px;
+            border: none;
+            border-radius: 14px;
+            background: #f0f0f0;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .object-option span:first-child {
+            font-size: 35px;
+        }
+
+        .object-option:hover {
+            transform: scale(1.03);
+        }
+
+        .object-option.selected {
+            background: #cce5ff;
+            outline: 3px solid #4285f4;
+        }
+
+        #startGame,
+        .result-box button {
+            border: none;
+            border-radius: 14px;
+            padding: 15px 30px;
+            font-size: 21px;
+            cursor: pointer;
+            background: #4285f4;
+            color: white;
+            font-weight: bold;
+        }
+
+        #startGame:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #selectedCount {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 25px;
+            background: #f0fff4;
+            border-radius: 15px;
+        }
+
+        .result-box h2 {
+            font-size: 28px;
+        }
+
+        .result-box p {
+            font-size: 20px;
+        }
+
+        #saveStatus {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .ai-info {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-card {
+                width: 110px;
+                height: 110px;
+            }
+
+            #instruction {
+                font-size: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Memory Match & Recall</h1>
+
+        <p>
+            Look carefully, remember the objects,
+            and select what you saw.
+        </p>
+
+    </div>
+
+
+    <div class="ai-panel">
+
+        <h2>AI Adaptive Difficulty</h2>
+
+        <p id="adaptiveStatus">
+            AI is analyzing recent performance...
+        </p>
+
+        <div class="ai-info">
+
+            <div class="info-card">
+                Recommended Difficulty
+                <strong id="difficulty">Loading...</strong>
+            </div>
+
+            <div class="info-card">
+                Objects
+                <strong id="objectCount">-</strong>
+            </div>
+
+            <div class="info-card">
+                Display Time
+                <strong id="displayTime">-</strong>
+            </div>
+
+        </div>
+
+        <p>
+            AI confidence:
+            <strong id="confidence">-</strong>
+        </p>
+
+    </div>
+
+
+    <div class="game-card">
+
+        <button id="startGame">
+            Start Memory Game
+        </button>
+
+        <div id="instruction">
+            Press Start when you are ready.
+        </div>
+
+        <div id="gameArea"></div>
+
+        <div id="options"></div>
+
+        <div id="selectedCount">
+            0 / 0
+        </div>
+
+        <div id="result"></div>
+
+        <div id="saveStatus"></div>
+
+    </div>
+
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/adaptive.js"></script>
+<script src="js/memory-match.js"></script>
+
+</body>
+
+</html>

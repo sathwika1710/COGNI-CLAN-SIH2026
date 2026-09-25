@@ -1,0 +1,1561 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CogniCare - Cognitive Symptom Screening</title>
+
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f7fb;
+
+            color: #1f2937;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f8df7
+                );
+
+            color: white;
+
+            padding: 25px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 58px;
+
+            height: 58px;
+
+            background: white;
+
+            color: #2563eb;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 32px;
+
+        }
+
+
+        .brand h1 {
+
+            margin: 0;
+
+            font-size: 30px;
+
+        }
+
+
+        .brand p {
+
+            margin: 5px 0 0;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        main {
+
+            width: 92%;
+
+            max-width: 900px;
+
+            margin: 30px auto 60px;
+
+        }
+
+
+        .back-link {
+
+            display: inline-block;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .back-link:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =====================================================
+           INTRO CARD
+        ====================================================== */
+
+        .intro-card {
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.07);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .intro-card h2 {
+
+            margin-top: 0;
+
+            font-size: 30px;
+
+        }
+
+
+        .intro-card p {
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .info-box {
+
+            background: #eef6ff;
+
+            border-left: 6px solid #2563eb;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-top: 20px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .warning-box {
+
+            background: #fff7e6;
+
+            border-left: 6px solid #f59e0b;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            margin-top: 15px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .start-button {
+
+            margin-top: 25px;
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 16px 28px;
+
+            border-radius: 12px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .start-button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* =====================================================
+           CHAT CARD
+        ====================================================== */
+
+        .chat-card {
+
+            display: none;
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.07);
+
+        }
+
+
+        /* =====================================================
+           PROGRESS
+        ====================================================== */
+
+        .progress-area {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .progress-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 10px;
+
+            background: #e5e7eb;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-fill {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #2563eb;
+
+            transition: width 0.3s ease;
+
+        }
+
+
+        /* =====================================================
+           CHAT AREA
+        ====================================================== */
+
+        .chat-area {
+
+            min-height: 250px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+
+        }
+
+
+        .bot-message {
+
+            align-self: flex-start;
+
+            max-width: 85%;
+
+            background: #eef6ff;
+
+            border-radius:
+                18px 18px 18px 5px;
+
+            padding: 18px;
+
+            font-size: 19px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .bot-name {
+
+            font-weight: bold;
+
+            color: #2563eb;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .question-category {
+
+            display: inline-block;
+
+            background: #e0e7ff;
+
+            color: #4338ca;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        /* =====================================================
+           ANSWER AREA
+        ====================================================== */
+
+        .answer-area {
+
+            margin-top: 20px;
+
+        }
+
+
+        .answer-title {
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        /* =====================================================
+           VOICE ASSISTANCE
+        ====================================================== */
+
+        .voice-assistance {
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background: #f0f7ff;
+
+            border: 1px solid #d7e8ff;
+
+            border-radius: 16px;
+
+        }
+        /* =====================================================
+   LANGUAGE SELECTOR
+===================================================== */
+
+.language-selector {
+    margin-bottom: 18px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #d7e8ff;
+    border-radius: 12px;
+}
+
+.language-selector label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.language-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #dbe3ec;
+    border-radius: 10px;
+    background: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+
+        .voice-title {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #2563eb;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .voice-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .voice-btn {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .voice-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .voice-btn:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        .voice-status {
+
+            margin: 12px 0 0;
+
+            font-size: 14px;
+
+            color: #4b5563;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =====================================================
+           ANSWER BUTTONS
+        ====================================================== */
+
+        .answer-buttons {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .answer-button {
+
+            border: 2px solid #dbe3ec;
+
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 16px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .answer-button:hover {
+
+            border-color: #2563eb;
+
+            background: #eff6ff;
+
+        }
+
+
+        .answer-button.selected {
+
+            background: #2563eb;
+
+            color: white;
+
+            border-color: #2563eb;
+
+        }
+
+
+        /* =====================================================
+           NEXT
+        ====================================================== */
+
+        .next-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: 25px;
+
+        }
+
+
+        .next-button {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 14px 25px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .next-button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .next-button:disabled {
+
+            background: #b6c2cf;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* =====================================================
+           RESULT CARD
+        ====================================================== */
+
+        .result-card {
+
+            display: none;
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.07);
+
+        }
+
+
+        .result-header {
+
+            text-align: center;
+
+        }
+
+
+        .result-icon {
+
+            font-size: 60px;
+
+        }
+
+
+        .result-header h2 {
+
+            font-size: 30px;
+
+            margin: 10px 0;
+
+        }
+
+
+        .result-score {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin: 15px 0;
+
+        }
+
+
+        .result-message {
+
+            font-size: 18px;
+
+            line-height: 1.7;
+
+            margin-top: 20px;
+
+        }
+
+
+        /* =====================================================
+           CATEGORY RESULTS
+        ====================================================== */
+
+        .category-results {
+
+            margin-top: 30px;
+
+        }
+
+
+        .category-results h3 {
+
+            font-size: 22px;
+
+        }
+
+
+        .category-item {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .category-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 6px;
+
+            font-weight: bold;
+
+        }
+
+
+        .category-bar {
+
+            height: 10px;
+
+            background: #e5e7eb;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+        }
+
+
+        .category-fill {
+
+            height: 100%;
+
+            background: #2563eb;
+
+        }
+
+
+        /* =====================================================
+           RECOMMENDATION
+        ====================================================== */
+
+        .recommendation {
+
+            margin-top: 30px;
+
+            padding: 22px;
+
+            border-radius: 15px;
+
+            background: #f4f7fb;
+
+            line-height: 1.7;
+
+            font-size: 17px;
+
+        }
+
+
+        .medical-note {
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background: #fff7e6;
+
+            border-left: 6px solid #f59e0b;
+
+            border-radius: 12px;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+
+        }
+
+
+        .restart-button {
+
+            display: block;
+
+            margin: 25px auto 0;
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 15px 25px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .restart-button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 650px) {
+
+            header {
+
+                padding: 20px;
+
+            }
+
+
+            .brand h1 {
+
+                font-size: 24px;
+
+            }
+
+
+            main {
+
+                width: 94%;
+
+            }
+
+
+            .intro-card,
+            .chat-card,
+            .result-card {
+
+                padding: 22px;
+
+            }
+
+
+            .answer-buttons {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .voice-buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .voice-btn {
+
+                width: 100%;
+
+            }
+
+
+            .bot-message {
+
+                max-width: 95%;
+
+            }
+
+        }
+        /* =====================================================
+   LANGUAGE SELECTOR
+===================================================== */
+
+.language-selector {
+    margin-bottom: 18px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #d7e8ff;
+    border-radius: 12px;
+}
+
+.language-selector label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.language-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #dbe3ec;
+    border-radius: 10px;
+    background: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+    </style>
+
+    
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header>
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                &#x1F9E0; 
+            </div>
+
+            <div>
+
+                <h1>
+                    CogniCare
+                </h1>
+
+                <p>
+                    Cognitive Symptom Screening
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =================================================
+             BACK
+        ================================================== -->
+
+        <a
+            href="dashboard.html"
+            class="back-link"
+        >
+            &#x2190; Back to CogniCare
+        </a>
+
+
+
+        <!-- =================================================
+             INTRODUCTION
+        ================================================== -->
+
+        <section
+            class="intro-card"
+            id="introCard"
+        >
+
+            <h2>
+                &#x1F9E0; Let's Understand Your Concerns
+            </h2>
+
+
+            <p>
+
+                Hello! I will ask you about some changes
+                that you may have noticed in memory,
+                communication, daily activities,
+                orientation and behaviour.
+
+            </p>
+
+
+            <p>
+
+                There are no right or wrong answers.
+                Please answer based on what you have
+                experienced recently.
+
+            </p>
+
+
+            <div class="info-box">
+
+                <strong>
+                    How it works:
+                </strong>
+
+                <br><br>
+
+                I will describe a symptom and you can tell me
+                whether it happens:
+
+                <br><br>
+
+                <strong>
+                    Never &#x2022; Sometimes &#x2022; Often &#x2022; Frequently
+                </strong>
+
+                <br><br>
+
+                You can also use the voice assistant to
+                hear the questions and answer by speaking.
+
+            </div>
+
+
+            <div class="warning-box">
+
+                <strong>
+                    Important:
+                </strong>
+
+                <br>
+
+                This is a supportive symptom-screening
+                feature.
+
+                It does not diagnose dementia or determine
+                a medical dementia stage.
+
+                <br><br>
+
+                A healthcare professional should evaluate
+                persistent or concerning symptoms.
+
+            </div>
+
+
+            <button
+                type="button"
+                class="start-button"
+                id="startButton"
+            >
+                Start Symptom Screening &#x2192;
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CHAT SCREEN
+        ================================================== -->
+
+        <section
+            class="chat-card"
+            id="chatCard"
+        >
+
+
+            <!-- =============================================
+                 PROGRESS
+            ============================================== -->
+
+            <div class="progress-area">
+
+                <div class="progress-info">
+
+                    <span id="progressText">
+                        Symptom 1 of 12
+                    </span>
+
+                    <span id="progressPercent">
+                        8%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 CHAT
+            ============================================== -->
+
+            <div
+                class="chat-area"
+                id="chatArea"
+            ></div>
+
+
+
+            <!-- =============================================
+                 ANSWERS
+            ============================================== -->
+
+            <div class="answer-area">
+
+
+                <div class="answer-title">
+
+                    How often does this happen?
+
+                </div>
+
+
+
+                <!-- =========================================
+                     VOICE ASSISTANCE
+                ========================================== -->
+
+<div class="voice-assistance">
+
+    <div class="voice-title">
+        &#x1F50A; Voice Assistance
+    </div>
+
+    <div class="language-selector">
+
+        <label for="languageSelect">
+            &#x1F310; Select Language
+        </label>
+
+        <select
+            id="languageSelect"
+            class="language-select"
+        >
+
+            <option value="en-IN">English</option>
+
+            <option value="hi-IN">Hindi</option>
+
+            <option value="as-IN">Assamese</option>
+
+            <option value="bn-IN">Bengali</option>
+
+        </select>
+
+    </div>
+
+
+                    <div class="voice-buttons">
+
+
+                        <button
+                            type="button"
+                            id="speakQuestionBtn"
+                            class="voice-btn"
+                        >
+
+                            &#x1F50A; Hear Question
+
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            id="speakAnswerBtn"
+                            class="voice-btn"
+                        >
+
+                            &#x1F399;&#xFE0F; Speak Answer
+
+                        </button>
+
+
+                    </div>
+
+
+                    <p
+                        id="voiceStatus"
+                        class="voice-status"
+                    >
+
+                        You can listen to the question
+                        or answer using your voice.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     ANSWER BUTTONS
+                ========================================== -->
+
+                <div
+                    class="answer-buttons"
+                    id="answerButtons"
+                >
+
+
+                    <button
+                        type="button"
+                        class="answer-button"
+                        data-value="0"
+                    >
+
+                        Never
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="answer-button"
+                        data-value="1"
+                    >
+
+                        Sometimes
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="answer-button"
+                        data-value="2"
+                    >
+
+                        Often
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="answer-button"
+                        data-value="3"
+                    >
+
+                        Frequently
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 NEXT
+            ============================================== -->
+
+            <div class="next-area">
+
+
+                <button
+                    type="button"
+                    class="next-button"
+                    id="nextButton"
+                    disabled
+                >
+
+                    Next &#x2192;
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RESULT
+        ================================================== -->
+
+        <section
+            class="result-card"
+            id="resultCard"
+        >
+
+
+            <div class="result-header">
+
+
+                <div
+                    class="result-icon"
+                    id="resultIcon"
+                >
+                    &#x1F9E0; 
+                </div>
+
+
+                <h2 id="resultTitle">
+
+                    Screening Complete
+
+                </h2>
+
+
+                <div
+                    class="result-score"
+                    id="resultScore"
+                >
+
+                    Screening Score: 0 / 36
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RESULT MESSAGE
+            ============================================== -->
+
+            <div
+                class="result-message"
+                id="resultMessage"
+            ></div>
+
+
+
+            <!-- =============================================
+                 CATEGORY RESULTS
+            ============================================== -->
+
+            <div
+                class="category-results"
+                id="categoryResults"
+            >
+
+
+                <h3>
+                    &#x1F4CA; Symptom Profile
+                </h3>
+
+
+                <div id="categoryList"></div>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RECOMMENDATION
+            ============================================== -->
+
+            <div class="recommendation">
+
+
+                <strong>
+                    &#x1F4A1; Recommended Next Step
+                </strong>
+
+
+                <p id="recommendationText"></p>
+
+
+            </div>
+
+
+
+            <!-- =============================================
+                 MEDICAL NOTE
+            ============================================== -->
+
+            <div class="medical-note">
+
+                &#x26A0;&#xFE0F;
+
+                <strong>
+                    Important:
+                </strong>
+
+                This screening result is not a medical
+                diagnosis.
+
+                Cognitive symptoms can have many possible
+                causes, and only a qualified healthcare
+                professional can assess the cause and
+                diagnose a condition.
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RESTART
+            ============================================== -->
+
+            <button
+                type="button"
+                class="restart-button"
+                id="restartButton"
+            >
+
+                Take Screening Again
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+<script src="js/voice-assistant.js?v=2"></script>
+<script src="js/cognitive-screening.js?v=6"></script>
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const languageSelect =
+            document.getElementById(
+                "languageSelect"
+            );
+
+
+        if (!languageSelect) {
+            return;
+        }
+
+
+        // Load previously selected language
+
+        const savedLanguage =
+            CogniCareVoice.getLanguage();
+
+
+        languageSelect.value =
+            savedLanguage;
+
+
+        // Change language
+
+        languageSelect.addEventListener(
+            "change",
+            function() {
+
+                const selectedLanguage =
+                    this.value;
+
+
+                CogniCareVoice.setLanguage(
+                    selectedLanguage
+                );
+
+
+                const languageName =
+                    CogniCareVoice.getLanguageName();
+
+
+                const voiceStatus =
+                    document.getElementById(
+                        "voiceStatus"
+                    );
+
+
+                if (voiceStatus) {
+
+                    voiceStatus.textContent =
+                        `Voice language changed to ${languageName}.`;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+<script src="js/auth-guard.js"></script>
+</body>
+
+</html>
+
+
+
+

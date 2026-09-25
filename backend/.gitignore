@@ -1,0 +1,18 @@
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Python
+.pytest_cache/
+
+# ML model/cache files
+.cache/
+huggingface_cache/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

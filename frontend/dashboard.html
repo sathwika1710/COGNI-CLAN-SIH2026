@@ -1,0 +1,1774 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CogniCare Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            background: #f4f7fb;
+
+            color: #102a56;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+
+        .dashboard {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 30px;
+
+        }
+
+
+        .topbar {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            background: #2f73e6;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 14px 25px;
+
+            border-radius: 14px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .welcome {
+
+            background: linear-gradient(
+                135deg,
+                #286ee6,
+                #4c8cf0
+            );
+
+            color: white;
+
+            border-radius: 25px;
+
+            padding: 45px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .welcome h1 {
+
+            font-size: 42px;
+
+            margin: 0 0 15px;
+
+        }
+
+
+        .welcome p {
+
+            font-size: 21px;
+
+            line-height: 1.6;
+
+            margin: 5px 0;
+
+        }
+
+
+        .section {
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 32px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    30,
+                    70,
+                    120,
+                    0.08
+                );
+
+        }
+
+
+        .section h2 {
+
+            font-size: 30px;
+
+            margin-top: 0;
+
+        }
+
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .stat {
+
+            background: #eef5ff;
+
+            border-radius: 18px;
+
+            padding: 25px 15px;
+
+            text-align: center;
+
+        }
+
+
+        .stat .number {
+
+            font-size: 36px;
+
+            font-weight: bold;
+
+            color: #286ee6;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .stat .label {
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           AI RECOMMENDATION
+        ===================================================== */
+
+        .ai-box {
+
+            border-left: 7px solid #2f73e6;
+
+            background: #edf5ff;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+        }
+
+
+        .ai-title {
+
+            font-size: 21px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .difficulty {
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            color: #286ee6;
+
+        }
+
+
+        .confidence {
+
+            font-size: 19px;
+
+            margin-top: 12px;
+
+        }
+
+
+        .reason {
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            margin-top: 18px;
+
+        }
+
+
+        /* =====================================================
+           COGNITIVE SCREENING
+        ===================================================== */
+
+        .screening-box {
+
+            border-left: 7px solid #7b61c9;
+
+            background: #f5f1ff;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+        }
+
+
+        .screening-title {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .screening-description {
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .screening-points {
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .screening-btn {
+
+            display: inline-block;
+
+            background: #7b61c9;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 15px 28px;
+
+            border-radius: 13px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+        }
+
+
+        .screening-btn:hover {
+
+            opacity: 0.9;
+
+        }
+
+
+        .screening-note {
+
+            margin-top: 18px;
+
+            color: #52657d;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =====================================================
+           LATEST SCREENING RESULT
+        ===================================================== */
+
+        .latest-screening-box {
+
+            border-left: 7px solid #7b61c9;
+
+            background: #f8f5ff;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+        }
+
+
+        .latest-screening-result {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .latest-screening-score {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .latest-screening-date {
+
+            color: #65748b;
+
+            font-size: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .latest-screening-message {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .screening-again-btn {
+
+            display: inline-block;
+
+            background: #7b61c9;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+        }
+
+
+        .screening-again-btn:hover {
+
+            opacity: 0.9;
+
+        }
+
+
+        .screening-loading {
+
+            color: #68778d;
+
+            font-size: 17px;
+
+        }
+
+
+        .screening-empty {
+
+            background: #f5f7fa;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            color: #5b6878;
+
+        }
+
+
+        .screening-empty a {
+
+            color: #7b61c9;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+
+        .screening-error {
+
+            background: #fff5f5;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            font-size: 17px;
+
+            color: #8a4b4b;
+
+        }
+
+
+        /* =====================================================
+           CONTINUE
+        ===================================================== */
+
+        .continue {
+
+            text-align: center;
+
+        }
+
+
+        .continue-btn {
+
+            display: inline-block;
+
+            background: #2f73e6;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 18px 35px;
+
+            border-radius: 15px;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+        }
+
+
+        .note {
+
+            color: #52657d;
+
+            font-size: 15px;
+
+            margin-top: 18px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .welcome h1 {
+
+                font-size: 32px;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .dashboard {
+
+                padding: 18px;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .welcome {
+
+                padding: 30px 25px;
+
+            }
+
+
+            .section {
+
+                padding: 22px;
+
+            }
+
+        }
+
+    </style>
+
+    <script
+    defer
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_dmFsaWQtYWRkZXItMzA4MS5jbGVyay5hY2NvdW50cy5kZXYk"
+    src="https://valid-adder-3081.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js">
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="cognicare-quick-access-clean">
+
+#cognicare-quick-access {
+    width: calc(100% - 40px) !important;
+    max-width: 1300px !important;
+    margin: 35px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+}
+
+#cognicare-quick-access > h2 {
+    grid-column: 1 / -1 !important;
+    margin: 0 0 5px 0 !important;
+}
+
+#cognicare-quick-access > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+    padding: 26px 20px !important;
+    text-align: center !important;
+    overflow: hidden !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+#cognicare-quick-access > div > div {
+    width: auto !important;
+}
+
+#cognicare-quick-access > div h3 {
+    width: 100% !important;
+    margin: 5px 0 10px !important;
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    overflow-wrap: break-word !important;
+}
+
+#cognicare-quick-access > div p {
+    width: 100% !important;
+    margin: 0 0 18px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    overflow-wrap: break-word !important;
+}
+
+#cognicare-quick-access > div a {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    white-space: normal !important;
+    padding: 11px 8px !important;
+}
+
+@media (max-width: 800px) {
+    #cognicare-quick-access {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 500px) {
+    #cognicare-quick-access {
+        width: calc(100% - 30px) !important;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+</style>
+
+
+<style id="quick-access-layout-final">
+
+#cognicare-quick-access {
+    display:grid !important;
+    grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+    gap:20px !important;
+    align-items:stretch !important;
+}
+
+#cognicare-quick-access > div {
+    min-width:0 !important;
+}
+
+@media (max-width:900px) {
+    #cognicare-quick-access {
+        grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width:600px) {
+    #cognicare-quick-access {
+        grid-template-columns:1fr !important;
+        width:calc(100% - 30px) !important;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+<button id="logoutBtn" style="position:fixed;top:20px;right:20px;z-index:9999;padding:10px 18px;border:none;border-radius:8px;cursor:pointer;">Logout</button>
+<script>
+document.getElementById("logoutBtn").addEventListener("click", function () {
+    localStorage.removeItem("cognicare_user");
+    window.location.href = "auth.html";
+});
+</script>
+
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         BACK
+    ====================================================== -->
+
+    <div class="topbar">
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+
+            &#8592; Back to CogniCare
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         WELCOME
+    ====================================================== -->
+
+    <section class="welcome">
+
+        <h1>
+            &#129504; Welcome to CogniCare
+        </h1>
+
+        <p>
+            Here is your cognitive activity summary.
+        </p>
+
+        <p>
+            Keep practicing regularly and continue at your own pace.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         ACTIVITY SUMMARY
+    ====================================================== -->
+
+    <section id="cognicare-quick-access" style="
+    width:calc(100% - 40px);
+    max-width:1300px;
+    margin:35px auto;
+    padding:0;
+    box-sizing:border-box;
+">
+
+    <h2 style="
+        grid-column:1/-1;
+        color:#173b70;
+        margin:0 0 5px;
+        font-size:32px;
+    ">
+        &#9889; Quick Access
+    </h2>
+
+    <div style="
+        background:white;
+        border-radius:18px;
+        padding:26px 20px;
+        text-align:center;
+        box-sizing:border-box;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    ">
+        <div style="font-size:48px;margin-bottom:10px;">&#128276;</div>
+
+        <h3 style="
+            margin:5px 0 10px;
+            color:#173b70;
+            font-size:22px;
+            line-height:1.3;
+        ">Reminders</h3>
+
+        <p style="
+            margin:0 0 20px;
+            color:#64748b;
+            font-size:15px;
+            line-height:1.5;
+        ">Medicine, hydration, activities and appointments</p>
+
+        <a href="reminders.html" style="
+            display:block;
+            width:100%;
+            padding:12px 10px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            box-sizing:border-box;
+        ">Open Reminders</a>
+    </div>
+
+    <div style="
+        background:white;
+        border-radius:18px;
+        padding:26px 20px;
+        text-align:center;
+        box-sizing:border-box;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    ">
+        <div style="font-size:48px;margin-bottom:10px;">&#128221;</div>
+
+        <h3 style="
+            margin:5px 0 10px;
+            color:#173b70;
+            font-size:22px;
+            line-height:1.3;
+        ">Memory Assistant</h3>
+
+        <p style="
+            margin:0 0 20px;
+            color:#64748b;
+            font-size:15px;
+            line-height:1.5;
+        ">Store and recall important memories</p>
+
+        <a href="memory-assistant.html" style="
+            display:block;
+            width:100%;
+            padding:12px 10px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            box-sizing:border-box;
+        ">Open Assistant</a>
+    </div>
+
+    <div style="
+        background:white;
+        border-radius:18px;
+        padding:26px 20px;
+        text-align:center;
+        box-sizing:border-box;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    ">
+        <div style="font-size:48px;margin-bottom:10px;">&#128202;</div>
+
+        <h3 style="
+            margin:5px 0 10px;
+            color:#173b70;
+            font-size:22px;
+            line-height:1.3;
+        ">My Progress</h3>
+
+        <p style="
+            margin:0 0 20px;
+            color:#64748b;
+            font-size:15px;
+            line-height:1.5;
+        ">View activity and screening progress</p>
+
+        <a href="progress.html" style="
+            display:block;
+            width:100%;
+            padding:12px 10px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            box-sizing:border-box;
+        ">View Progress</a>
+    </div>
+
+    <div style="
+        background:white;
+        border-radius:18px;
+        padding:26px 20px;
+        text-align:center;
+        box-sizing:border-box;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    ">
+        <div style="font-size:48px;margin-bottom:10px;">&#128106;</div>
+
+        <h3 style="
+            margin:5px 0 10px;
+            color:#173b70;
+            font-size:22px;
+            line-height:1.3;
+        ">Caregiver Dashboard</h3>
+
+        <p style="
+            margin:0 0 20px;
+            color:#64748b;
+            font-size:15px;
+            line-height:1.5;
+        ">Review activities and cognitive progress</p>
+
+        <a href="caregiver.html" style="
+            display:block;
+            width:100%;
+            padding:12px 10px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-weight:600;
+            box-sizing:border-box;
+        ">Open Caregiver</a>
+    </div>
+
+</section>
+
+<section class="section">
+
+        <h2>
+            &#128202; Your Recent Activity
+        </h2>
+
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="activitiesCompleted"
+                >
+                    0
+                </div>
+
+                <div class="label">
+                    Activities Completed
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="averagePerformance"
+                >
+                    0%
+                </div>
+
+                <div class="label">
+                    Average Performance
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="averageResponse"
+                >
+                    0s
+                </div>
+
+                <div class="label">
+                    Average Response Time
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="number"
+                    id="bestPerformance"
+                >
+                    0%
+                </div>
+
+                <div class="label">
+                    Best Performance
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         AI RECOMMENDATION
+    ====================================================== -->
+
+    <section class="section">
+
+        <h2>
+            &#129302; AI Activity Recommendation
+        </h2>
+
+
+        <div class="ai-box">
+
+            <div class="ai-title">
+
+                Recommended Difficulty
+
+            </div>
+
+
+            <div
+                class="difficulty"
+                id="difficulty"
+            >
+
+                Loading...
+
+            </div>
+
+
+            <div
+                class="confidence"
+                id="confidence"
+            >
+
+                AI Confidence: --
+
+            </div>
+
+
+            <div
+                class="reason"
+                id="aiReason"
+            >
+
+                The CogniCare Transformer is analysing recent
+                longitudinal game-performance data.
+
+            </div>
+
+        </div>
+
+
+        <div class="note">
+
+            This recommendation is for activity personalization
+            and is not a medical diagnosis.
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LATEST COGNITIVE SCREENING RESULT
+    ====================================================== -->
+
+    <section class="section">
+
+        <h2>
+            &#128202; Latest Cognitive Screening
+        </h2>
+
+
+        <div
+            id="latestScreeningContent"
+            class="latest-screening-box"
+        >
+
+            <div class="screening-loading">
+
+                Loading your latest screening result...
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         START NEW COGNITIVE SCREENING
+    ====================================================== -->
+
+    <section class="section">
+
+        <h2>
+            &#129504; Cognitive Screening
+        </h2>
+
+
+        <div class="screening-box">
+
+
+            <div class="screening-title">
+
+                Check Your Cognitive Performance
+
+            </div>
+
+
+            <div class="screening-description">
+
+                Answer a short set of questions related to
+                memory, attention, orientation, reasoning and
+                everyday cognitive activities.
+
+            </div>
+
+
+            <div class="screening-points">
+
+                &#129504; Memory and recall
+                <br>
+
+                &#129489; Orientation
+                <br>
+
+                &#128065; Attention
+                <br>
+
+                &#128161; Reasoning
+                <br>
+
+                &#129513; Everyday problem solving
+
+            </div>
+
+
+            <a
+                href="cognitive-screening.html"
+                class="screening-btn"
+            >
+
+                ▶ Start Cognitive Screening
+
+            </a>
+
+
+            <div class="screening-note">
+
+                &#8505; This is a supportive screening feature and
+                does not diagnose dementia or determine a
+                medical dementia stage. For medical concerns,
+                consult a qualified healthcare professional.
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTINUE
+    ====================================================== -->
+
+    <section class="section continue">
+
+        <h2>
+            &#9654; Continue Your Practice
+        </h2>
+
+
+        <p>
+
+            Start a cognitive activity based on your
+            recommended difficulty.
+
+        </p>
+
+
+        <a
+            href="games.html"
+            class="continue-btn"
+        >
+
+            &#9654; Start Cognitive Activity
+
+        </a>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
+
+const USER_ID = Number(JSON.parse(localStorage.getItem("cognicare_user") || "{}").user_id || 0);
+
+const API_BASE_URL =
+    "http://127.0.0.1:8000";
+
+
+// ============================================================
+// LOAD DASHBOARD
+// ============================================================
+
+async function loadDashboard() {
+
+
+    // ========================================================
+    // GAME ACTIVITY
+    // ========================================================
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/game-sessions/user/${USER_ID}`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load activities"
+            );
+
+        }
+
+
+        const sessions =
+            await response.json();
+
+
+        if (sessions.length > 0) {
+
+
+            const completed =
+                sessions.filter(
+                    session =>
+                        session.completed === true
+                );
+
+
+            document.getElementById(
+                "activitiesCompleted"
+            ).textContent =
+                completed.length;
+
+
+            const accuracies =
+                completed
+                    .map(
+                        session =>
+                            Number(
+                                session.accuracy
+                            )
+                    )
+                    .filter(
+                        value =>
+                            !isNaN(value)
+                    );
+
+
+            const responseTimes =
+                completed
+                    .map(
+                        session =>
+                            Number(
+                                session.response_time
+                            )
+                    )
+                    .filter(
+                        value =>
+                            !isNaN(value)
+                    );
+
+
+            if (accuracies.length > 0) {
+
+
+                const average =
+                    accuracies.reduce(
+                        (a, b) =>
+                            a + b,
+                        0
+                    ) /
+                    accuracies.length;
+
+
+                const best =
+                    Math.max(
+                        ...accuracies
+                    );
+
+
+                document.getElementById(
+                    "averagePerformance"
+                ).textContent =
+                    average.toFixed(1) +
+                    "%";
+
+
+                document.getElementById(
+                    "bestPerformance"
+                ).textContent =
+                    best.toFixed(1) +
+                    "%";
+
+            }
+
+
+            if (responseTimes.length > 0) {
+
+
+                const averageResponse =
+                    responseTimes.reduce(
+                        (a, b) =>
+                            a + b,
+                        0
+                    ) /
+                    responseTimes.length;
+
+
+                document.getElementById(
+                    "averageResponse"
+                ).textContent =
+                    averageResponse.toFixed(1) +
+                    "s";
+
+            }
+
+        }
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Dashboard activity error:",
+            error
+        );
+
+    }
+
+
+    // ========================================================
+    // AI RECOMMENDATION
+    // ========================================================
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/adaptive/${USER_ID}/Memory%20Match%20%26%20Recall`
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "AI API unavailable"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        document.getElementById(
+            "difficulty"
+        ).textContent =
+            data.recommended_difficulty;
+
+
+        document.getElementById(
+            "confidence"
+        ).textContent =
+            "AI Confidence: " +
+            (
+                data.confidence * 100
+            ).toFixed(1) +
+            "%";
+
+
+        document.getElementById(
+            "aiReason"
+        ).textContent =
+            "The Transformer predicts the recommended difficulty " +
+            "from the user's recent longitudinal game-performance sequence.";
+
+
+    }
+
+    catch (error) {
+
+
+        document.getElementById(
+            "difficulty"
+        ).textContent =
+            "Not available";
+
+
+        document.getElementById(
+            "confidence"
+        ).textContent =
+            "AI Confidence: --";
+
+
+        document.getElementById(
+            "aiReason"
+        ).textContent =
+            "AI recommendation will appear when sufficient game-performance data is available.";
+
+    }
+
+
+    // ========================================================
+    // LATEST COGNITIVE SCREENING
+    // ========================================================
+
+    await loadLatestScreening();
+
+}
+
+
+// ============================================================
+// LOAD LATEST COGNITIVE SCREENING
+// ============================================================
+
+async function loadLatestScreening() {
+
+
+    const container =
+        document.getElementById(
+            "latestScreeningContent"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/cognitive-screenings/user/${USER_ID}/latest`
+            );
+
+
+        // ----------------------------------------------------
+        // NO SCREENING FOUND
+        // ----------------------------------------------------
+
+        if (response.status === 404) {
+
+
+            container.innerHTML = `
+
+                <div class="screening-empty">
+
+                    &#128221; You have not completed a cognitive
+                    screening yet.
+
+                    <br><br>
+
+                    <a href="cognitive-screening.html">
+
+                        ▶ Start Cognitive Screening
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        // ----------------------------------------------------
+        // SERVER ERROR
+        // ----------------------------------------------------
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not load screening result"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        // ----------------------------------------------------
+        // RESULT ICON
+        // ----------------------------------------------------
+
+        let icon = "\u2139\uFE0F";
+
+
+        if (
+            data.result_category ===
+            "Few Symptoms Reported"
+        ) {
+
+            icon = "\u26A0\uFE0F";
+
+        }
+
+        else if (
+            data.result_category ===
+            "Some Cognitive Symptoms Reported"
+        ) {
+
+            icon = "\u26A0\uFE0F";
+
+        }
+
+        else if (
+            data.result_category ===
+            "Several Symptoms Reported"
+        ) {
+
+            icon = "\u26A0\uFE0F";
+
+        }
+
+
+        // ----------------------------------------------------
+        // FORMAT DATE
+        // ----------------------------------------------------
+
+        let formattedDate =
+            "Recently";
+
+
+        if (data.screened_at) {
+
+            formattedDate =
+                new Date(
+                    data.screened_at
+                ).toLocaleString(
+                    "en-IN",
+                    {
+                        dateStyle: "medium",
+                        timeStyle: "short"
+                    }
+                );
+
+        }
+
+
+        // ----------------------------------------------------
+        // DISPLAY RESULT
+        // ----------------------------------------------------
+
+        container.innerHTML = `
+
+            <div class="latest-screening-result">
+
+                ${icon}
+
+                ${data.result_category}
+
+            </div>
+
+
+            <div class="latest-screening-score">
+
+                Screening Score:
+
+                ${data.score}
+
+                /
+
+                ${data.max_score}
+
+                (${data.percentage}%)
+
+            </div>
+
+
+            <div class="latest-screening-date">
+
+                Screened on:
+                ${formattedDate}
+
+            </div>
+
+
+            <div class="latest-screening-message">
+
+                <strong>
+                    &#128161; What this means
+                </strong>
+
+                <p>
+
+                    This result summarizes the cognitive
+                    symptoms reported during your latest
+                    screening.
+
+                </p>
+
+                <p>
+
+                    It is a supportive screening result and
+                    is <strong>not a medical diagnosis</strong>.
+
+                    If symptoms are persistent or increasing,
+                    consider discussing them with a qualified
+                    healthcare professional.
+
+                </p>
+
+            </div>
+
+
+            <a
+                href="cognitive-screening.html"
+                class="screening-again-btn"
+            >
+
+                ↻ Take Screening Again
+
+            </a>
+
+        `;
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Latest screening error:",
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="screening-error">
+
+                &#9888; Unable to load your latest screening
+                result.
+
+                <br><br>
+
+                Please make sure the CogniCare backend
+                is running.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ============================================================
+// START DASHBOARD
+// ============================================================
+
+loadDashboard();
+
+
+</script>
+
+
+<script src="js/auth-guard.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="cognicare-responsive-dashboard-v1-script">
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const section = document.getElementById("cognicare-quick-access");
+
+    if (!section) return;
+
+    const paths = [
+        "reminders.html",
+        "memory-assistant.html",
+        "progress.html",
+        "caregiver.html"
+    ];
+
+    const links = paths
+        .map(function (path) {
+            return section.querySelector('a[href="' + path + '"]');
+        })
+        .filter(Boolean);
+
+    if (links.length !== 4) return;
+
+    const parent = links[0].parentElement;
+
+    if (parent && links.every(function (link) {
+        return link.parentElement === parent;
+    })) {
+        parent.classList.add("cognicare-quick-grid");
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

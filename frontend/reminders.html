@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Reminders - CogniCare</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .reminder-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .reminder-card {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .reminder-card h2 {
+            font-size: 32px;
+            color: #16345f;
+            margin-bottom: 20px;
+        }
+
+        .reminder-card p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .reminder-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .reminder-form label {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .reminder-form input,
+        .reminder-form select,
+        .reminder-form textarea {
+
+            padding: 16px;
+
+            font-size: 18px;
+
+            border: 2px solid #dce6f5;
+
+            border-radius: 12px;
+
+            font-family: inherit;
+        }
+
+        .reminder-form textarea {
+            min-height: 120px;
+        }
+
+        .reminder-form button {
+
+            width: fit-content;
+
+            padding: 15px 28px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #3478e5;
+
+            color: white;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .reminder-form button:hover {
+            background: #2563c7;
+        }
+
+        .reminder-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            background: #f4f8ff;
+
+            border-left: 6px solid #3478e5;
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            margin-bottom: 18px;
+        }
+
+        .reminder-item h3 {
+
+            margin: 0 0 10px;
+
+            font-size: 23px;
+
+            color: #16345f;
+        }
+
+        .reminder-item p {
+
+            margin: 5px 0;
+
+            font-size: 18px;
+        }
+
+        .delete-button {
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 12px 18px;
+
+            background: #ffe8e8;
+
+            color: #a32626;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        .status-message {
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            margin-bottom: 20px;
+
+            font-size: 18px;
+        }
+
+        .success {
+            background: #e7f8ed;
+            color: #176b35;
+        }
+
+        .error {
+            background: #fff0f0;
+            color: #a32626;
+        }
+
+        .empty-message {
+
+            background: #f4f8ff;
+
+            padding: 25px;
+
+            border-radius: 14px;
+
+            font-size: 20px;
+        }
+
+        .reminder-types {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+        .type-box {
+
+            background: #f4f8ff;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            text-align: center;
+
+            font-size: 19px;
+
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+
+            .reminder-card {
+                padding: 22px;
+            }
+
+            .reminder-types {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reminder-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+
+<style>
+.cognicare-back-nav {
+    width: min(1320px, calc(100% - 40px));
+    margin: 22px auto 10px;
+}
+.cognicare-back-nav button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2563eb;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.cognicare-back-nav button:hover {
+    background: #dbe8ff;
+    transform: translateY(-1px);
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="cognicare-back-nav">
+    <button type="button" onclick="window.location.href='dashboard.html'">
+        &larr; Back to CogniCare
+    </button>
+</div>
+
+
+
+
+
+
+<header class="page-header">
+
+    <div class="header-content">
+
+        <h1>&#128276; Reminders</h1>
+
+        <p>
+            CogniCare Cognitive Wellness & Memory Assistance
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="reminder-container">
+
+
+
+
+
+<!-- Introduction -->
+
+<section class="reminder-card">
+
+    <h2>&#128276; Daily Reminders</h2>
+
+    <p>
+
+        CogniCare helps remember important daily activities,
+        medicines, hydration and medical appointments.
+
+    </p>
+
+
+    <div class="reminder-types">
+
+        <div class="type-box">
+            💊<br>
+            Medicine
+        </div>
+
+        <div class="type-box">
+            💧<br>
+            Hydration
+        </div>
+
+        <div class="type-box">
+            🚶<br>
+            Daily Activity
+        </div>
+
+        <div class="type-box">
+            🏥<br>
+            Medical Appointment
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Add reminder -->
+
+<section class="reminder-card">
+
+    <h2>&#10133; Add a Reminder</h2>
+
+    <div id="statusMessage"></div>
+
+
+    <form id="reminderForm"
+          class="reminder-form">
+
+
+        <label for="reminderType">
+            Reminder Type
+        </label>
+
+        <select id="reminderType">
+
+            <option value="Medicine">
+                💊 Medicine
+            </option>
+
+            <option value="Hydration">
+                💧 Hydration
+            </option>
+
+            <option value="Daily Activity">
+                🚶 Daily Activity
+            </option>
+
+            <option value="Medical Appointment">
+                🏥 Medical Appointment
+            </option>
+
+        </select>
+
+
+        <label for="reminderTitle">
+            Reminder
+        </label>
+
+        <input
+            type="text"
+            id="reminderTitle"
+            placeholder="Example: Take morning medicine"
+            required
+        >
+
+
+        <label for="reminderDate">
+            Date
+        </label>
+
+        <input
+            type="date"
+            id="reminderDate"
+            required
+        >
+
+
+        <label for="reminderTime">
+            Time
+        </label>
+
+        <input
+            type="time"
+            id="reminderTime"
+            required
+        >
+
+
+        <label for="reminderNotes">
+            Notes
+        </label>
+
+        <textarea
+            id="reminderNotes"
+            placeholder="Optional notes..."
+        ></textarea>
+
+
+        <button type="submit">
+            🔔 Save Reminder
+        </button>
+
+
+    </form>
+
+</section>
+
+
+<!-- Saved reminders -->
+
+<section class="reminder-card">
+
+    <h2>&#128203; My Reminders</h2>
+
+    <div id="reminderList">
+
+        <div class="empty-message">
+            🔔 No reminders added yet.
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<script src="js/api.js"></script>
+
+<script src="js/reminders.js"></script>
+
+
+<script src="js/auth-guard.js"></script>
+</body>
+
+</html>
+

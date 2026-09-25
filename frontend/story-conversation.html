@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story & Conversation - CogniCare</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 21px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .ai-card {
+            border-left: 7px solid #3b82f6;
+        }
+
+        .ai-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .ai-recommendation {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .ai-box {
+            background: #eef5ff;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ai-box span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .ai-box strong {
+            font-size: 27px;
+        }
+
+        .story-title {
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .story {
+            background: #fff8e7;
+            border-radius: 18px;
+            padding: 28px;
+            font-size: 23px;
+            line-height: 1.7;
+            border: 2px solid #f1d58a;
+        }
+
+        .start-area {
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            border-radius: 14px;
+            padding: 17px 32px;
+            font-size: 21px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #3b82f6;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .question-number {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .option {
+            background: #f8fafc;
+            color: #111827;
+            border: 3px solid #dbe4f0;
+            min-height: 80px;
+        }
+
+        .option:hover {
+            border-color: #3b82f6;
+            background: #eef5ff;
+        }
+
+        .feedback {
+            text-align: center;
+            font-size: 23px;
+            font-weight: bold;
+            margin-top: 25px;
+            min-height: 32px;
+        }
+
+        .progress {
+            height: 16px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #3b82f6;
+            transition: width 0.3s;
+        }
+
+        .result {
+            text-align: center;
+            background: #ecfdf5;
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .result h2 {
+            font-size: 35px;
+        }
+
+        .result p {
+            font-size: 23px;
+            margin: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .note {
+            text-align: center;
+            font-size: 17px;
+            margin-top: 18px;
+            color: #4b5563;
+        }
+
+        @media (max-width: 750px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .ai-grid,
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .story {
+                font-size: 20px;
+            }
+
+            .question {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📖 Story & Conversation</h1>
+
+    <p class="subtitle">
+        Listen, remember the story, and answer the questions.
+    </p>
+
+    <!-- AI ADAPTIVE DIFFICULTY -->
+    <div class="card ai-card">
+
+        <div class="ai-title">
+            🤖 AI Adaptive Difficulty
+        </div>
+
+        <div class="ai-recommendation">
+            AI recommendation:
+            <strong id="aiDifficulty">Loading...</strong>
+        </div>
+
+        <div class="ai-grid">
+
+            <div class="ai-box">
+                <span>Recommended Difficulty</span>
+                <strong id="difficultyValue">--</strong>
+            </div>
+
+            <div class="ai-box">
+                <span>Questions</span>
+                <strong id="questionCount">--</strong>
+            </div>
+
+            <div class="ai-box">
+                <span>AI Confidence</span>
+                <strong id="confidenceValue">--</strong>
+            </div>
+
+        </div>
+
+        <p class="note" id="aiReason">
+            The Transformer is analysing recent performance...
+        </p>
+
+    </div>
+
+    <!-- STORY -->
+    <div class="card" id="storyCard">
+
+        <div class="story-title">
+            🌿 A Morning in the Village
+        </div>
+
+        <div class="story">
+            One peaceful morning, an elderly woman named Meera woke up early.
+            She opened the window and heard birds singing outside.
+
+            <br><br>
+
+            Meera walked to the garden and watered the flowers.
+            Her grandson Arun came to visit her and brought a basket of fresh
+            fruits.
+
+            <br><br>
+
+            They sat together on the veranda, talked about the old days,
+            and enjoyed a cup of tea.
+
+            <br><br>
+
+            Before Arun left, Meera reminded him to visit again the next morning.
+        </div>
+
+        <div class="start-area" style="margin-top:25px;">
+            <button id="startButton">▶ Start Conversation</button>
+        </div>
+
+    </div>
+
+    <!-- GAME -->
+    <div class="card hidden" id="gameCard">
+
+        <div class="question-number" id="questionNumber">
+            Question 1
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="question" id="questionText"></div>
+
+        <div class="options" id="optionsContainer"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+    </div>
+
+    <!-- RESULT -->
+    <div class="card hidden" id="resultCard">
+
+        <div class="result">
+
+            <h2 id="resultTitle">🎉 Well Done!</h2>
+
+            <p>
+                Difficulty:
+                <strong id="resultDifficulty"></strong>
+            </p>
+
+            <p>
+                Correct answers:
+                <strong id="resultScore"></strong>
+            </p>
+
+            <p>
+                Accuracy:
+                <strong id="resultAccuracy"></strong>
+            </p>
+
+            <p>
+                Response time:
+                <strong id="resultTime"></strong>
+            </p>
+
+            <p>
+                Mistakes:
+                <strong id="resultMistakes"></strong>
+            </p>
+
+            <button onclick="location.reload()">
+                🔄 Play Again
+            </button>
+
+            <p class="note">
+                Result saved locally and sent to the CogniCare backend when connected.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/adaptive.js"></script>
+<script src="js/story-conversation.js"></script>
+
+<script src="js/auth-guard.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6ff;
+    color: #172554;
+}
+
+.auth-page {
+    min-height: 100vh;
+    padding: 45px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brain {
+    font-size: 55px;
+    margin-bottom: 8px;
+}
+
+.auth-header h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.auth-header p {
+    margin-top: 8px;
+    font-size: 18px;
+    color: #58709a;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 38px;
+    border-radius: 22px;
+    box-shadow: 0 12px 40px rgba(30, 64, 175, 0.12);
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 14px;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d5dbea;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
+}
+
+form button {
+    margin-top: 25px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #1d4ed8;
+}
+
+form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.switch-text {
+    text-align: center;
+    margin-top: 25px;
+    color: #64748b;
+}
+
+.switch-text button {
+    border: none;
+    background: none;
+    color: #2563eb;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.message {
+    margin-top: 18px;
+    text-align: center;
+    font-weight: 600;
+    min-height: 22px;
+}
+
+.message.success {
+    color: #15803d;
+}
+
+.message.error {
+    color: #dc2626;
+}
+
+.security-note {
+    margin-top: 25px;
+    background: white;
+    padding: 16px 25px;
+    border-radius: 12px;
+    color: #4b6388;
+}
+
+.medical-note {
+    width: 100%;
+    max-width: 650px;
+    margin-top: 20px;
+    padding: 18px;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    color: #58709a;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+
+    .auth-card {
+        padding: 25px;
+    }
+
+    .auth-header h1 {
+        font-size: 34px;
+    }
+
+}

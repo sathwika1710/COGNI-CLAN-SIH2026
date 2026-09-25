@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CogniCare - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(40, 50, 100, 0.15);
+        }
+
+        .left {
+            background: linear-gradient(135deg, #376df5, #6855e8);
+            color: white;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        .logo p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 30px;
+            width: fit-content;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .left h2 {
+            font-size: 52px;
+            line-height: 1.05;
+            margin: 30px 0 20px;
+        }
+
+        .left h2 span {
+            color: #ffd94a;
+        }
+
+        .description {
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.9;
+            max-width: 520px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .feature {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .feature strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .feature small {
+            opacity: 0.8;
+        }
+
+        .right {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .right-header h2 {
+            margin: 0 0 8px;
+            color: #18233d;
+            font-size: 32px;
+        }
+
+        .right-header p {
+            margin: 0;
+            color: #68748d;
+        }
+
+        #clerk-sign-in {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left {
+                display: none;
+            }
+
+            .right {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+        <!-- LEFT SIDE -->
+        <section class="left">
+
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+
+                <div>
+                    <h1>CogniCare</h1>
+                    <p>Cognitive Wellness & Memory Assistance</p>
+                </div>
+            </div>
+
+            <div class="tag">
+                WELCOME TO A FRIENDLY SPACE ✨
+            </div>
+
+            <h2>
+                Keep your mind <span>active.</span><br>
+                Keep your memories <span>close.</span>
+            </h2>
+
+            <p class="description">
+                A simple, colorful and supportive space for cognitive
+                activities, everyday memories, routines and meaningful
+                engagement.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    🧩
+                    <strong>Brain Games</strong>
+                    <small>Fun cognitive activities</small>
+                </div>
+
+                <div class="feature">
+                    🧠
+                    <strong>My Memories</strong>
+                    <small>Keep special moments close</small>
+                </div>
+
+                <div class="feature">
+                    🌿
+                    <strong>Daily Routine</strong>
+                    <small>Simple reminders & support</small>
+                </div>
+
+                <div class="feature">
+                    🤝
+                    <strong>Caregiver Support</strong>
+                    <small>Stay connected</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT SIDE -->
+        <section class="right">
+
+            <div class="right-header">
+                <h2>Welcome to CogniCare 👋</h2>
+
+                <p>
+                    Sign in securely to continue your journey.
+                </p>
+            </div>
+
+            <!-- CLERK WILL RENDER HERE -->
+            <div id="clerk-sign-in"></div>
+
+        </section>
+
+    </div>
+
+</div>
+
+
+<!-- CLERK UI -->
+<script
+    defer
+    crossorigin="anonymous"
+    src="https://valid-adder-3081.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+    type="text/javascript">
+</script>
+
+<!-- CLERK JS -->
+<script
+    defer
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_dmFsaWQtYWRkZXItMzA4MS5jbGVyay5hY2NvdW50cy5kZXYk"
+    src="https://valid-adder-3081.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+    type="text/javascript">
+</script>
+
+
+<script>
+
+window.addEventListener("load", async function () {
+
+    try {
+
+        console.log("Starting Clerk...");
+
+        await Clerk.load({
+            ui: {
+                ClerkUI: window.__internal_ClerkUICtor
+            }
+        });
+
+        console.log("Clerk loaded successfully");
+
+        const signInDiv =
+            document.getElementById("clerk-sign-in");
+
+        if (Clerk.isSignedIn) {
+
+            console.log("User already signed in");
+
+            window.location.href = "dashboard.html";
+
+        } else {
+
+            console.log("Mounting Clerk SignIn...");
+
+            Clerk.mountSignIn(signInDiv);
+
+        }
+
+    } catch (error) {
+
+        console.error("Clerk initialization error:", error);
+
+        document.getElementById("clerk-sign-in").innerHTML = `
+            <div style="
+                padding:20px;
+                color:#c62828;
+                background:#ffebee;
+                border-radius:12px;
+                text-align:center;
+            ">
+                <strong>Unable to load authentication.</strong>
+                <br><br>
+                Please check the browser console.
+            </div>
+        `;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+﻿from pathlib import Path
+
+html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniCare - All Activities</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="page-header">
+        <a href="dashboard.html" class="back-button">&#x2190; Back to CogniCare</a>
+    </div>
+
+    <section class="hero-section">
+        <h1>&#x1F3AE; All Activities</h1>
+        <p>Choose an activity and practice at your own pace.</p>
+        <p>CogniCare uses your recent performance to recommend a suitable difficulty.</p>
+    </section>
+
+    <section class="card">
+        <h2>&#x1F9E0; Cognitive Activities</h2>
+
+        <div class="games-grid">
+
+            <div class="game-card">
+                <div class="game-icon">&#x1F9E0;</div>
+                <h3>Memory Match &amp; Recall</h3>
+                <p>Match familiar objects and strengthen memory and recall.</p>
+                <div class="game-purpose">
+                    <strong>Focus:</strong> Memory &amp; recall
+                </div>
+                <a href="memory.html" class="primary-button">
+                    Start Activity &#x2192;
+                </a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">&#x1F9E9;</div>
+                <h3>Everyday Problem Solver</h3>
+                <p>Answer simple everyday situations and practice decision-making.</p>
+                <div class="game-purpose">
+                    <strong>Focus:</strong> Problem solving &amp; attention
+                </div>
+                <a href="everyday-problem.html" class="primary-button">
+                    Start Activity &#x2192;
+                </a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">&#x1F4D6;</div>
+                <h3>Story &amp; Conversation</h3>
+                <p>Read familiar stories and answer questions about what you remember.</p>
+                <div class="game-purpose">
+                    <strong>Focus:</strong> Memory &amp; conversation
+                </div>
+                <a href="story-conversation.html" class="primary-button">
+                    Start Activity &#x2192;
+                </a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">&#x2764;&#xFE0F;</div>
+                <h3>My Life Memories</h3>
+                <p>Record meaningful people, places and experiences from your life.</p>
+                <div class="game-purpose">
+                    <strong>Focus:</strong> Personal memory support
+                </div>
+                <a href="life-memories.html" class="primary-button">
+                    Open Memories &#x2192;
+                </a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">&#x1F60A;</div>
+                <h3>Behaviour &amp; Emotional Response</h3>
+                <p>Respond to everyday situations and reflect on feelings and reactions.</p>
+                <div class="game-purpose">
+                    <strong>Focus:</strong> Emotional engagement
+                </div>
+                <a href="behaviour-emotional.html" class="primary-button">
+                    Start Activity &#x2192;
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="card ai-info">
+        <h2>&#x1F916; AI Adaptive Difficulty</h2>
+
+        <p>
+            CogniCare uses a Transformer-based AI model to analyse recent
+            longitudinal game performance.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>Easy</strong>
+                <span>Gentle practice</span>
+            </div>
+
+            <div class="info-box">
+                <strong>Medium</strong>
+                <span>Balanced practice</span>
+            </div>
+
+            <div class="info-box">
+                <strong>Hard</strong>
+                <span>More challenging practice</span>
+            </div>
+        </div>
+
+        <p class="small-note">
+            The recommendation is for activity personalization and is not a medical diagnosis.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>&#x1F338; Designed for Older Adults</h2>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                &#x1F50A;
+                <strong>Voice Assistance</strong>
+            </div>
+
+            <div class="info-box">
+                &#x1F4AC;
+                <strong>Simple Interaction</strong>
+            </div>
+
+            <div class="info-box">
+                &#x1F44D;
+                <strong>Easy to Use</strong>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script src="js/games.js"></script>
+
+</body>
+</html>
+"""
+
+Path("games.html").write_text(html, encoding="utf-8")
+print("games.html rebuilt cleanly.")
